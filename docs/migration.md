@@ -1,125 +1,48 @@
-# Migration Plan
+# Migration Record
 
-## Safety gate
+PR2 performs the first real consolidation into `feiyushaw/skills` after the bootstrap architecture was approved and merged.
 
-At bootstrap time, `feiyushaw/skills` is public while the source repositories `academic_skills`, `patent_skills`, and `presentation_skill` are private. Do not copy their contents into this repository until publication has been explicitly approved or the destination visibility has been changed.
-
-This bootstrap PR therefore records target mappings without migrating private content.
-
-## Phase 1 — Bootstrap
-
-- establish repository architecture;
-- create `core` primitives;
-- define invocation and authoring rules;
-- add pack manifests;
-- add validation CI;
-- document third-party provenance.
-
-## Phase 2 — Domain migration
+## Completed migrations
 
 ### Research
 
-Source: `feiyushaw/academic_skills`
+Source: `feiyushaw/academic_skills` at `b03a7651300081b9d292630fe50bb8c4be8d2007`.
 
-Target: `skills/research/`
+Destination: `skills/research/`.
 
-Planned skill mapping includes:
-
-- `literature-research`
-- `literature-scout`
-- `faithful-paper-translation`
-- `research-idea-refiner`
-- `research-critic`
-- `experiment-designer`
-- `result-harvester`
-- `scientific-figure`
-- `result-figure`
-- `paper-architect`
-- `chinese-to-academic-english`
-- `academic-writer`
-- `manuscript-review`
-
-Migration rule: preserve the existing Understand -> Innovate -> Prove -> Communicate -> Review lifecycle and claim-evidence discipline. Reuse `core` only for genuinely generic behavior.
+The research lifecycle and claim-evidence discipline were preserved. Skill-local references, templates, and scripts required for standalone operation were migrated with their parent skills.
 
 ### Patent
 
-Source: `feiyushaw/patent_skills`
+Source: `feiyushaw/patent_skills` at `be8f362d72a3f1df4058cccf8b39f3b75ab62b49`.
 
-Target: `skills/patent/`
+Destination: `skills/patent/`.
 
-Planned skills:
-
-- `codebase-patent-diff`
-- `cn-patent-invention-mining`
-- `cn-patent-prior-art`
-- `cn-patent-drafting`
-- `cn-patent-review`
-- `autonomous-driving-patent`
-
-Migration rule: preserve provenance as a mandatory gate. Do not weaken the distinction between upstream prior art, common engineering, user modification, and potential invention.
+The mandatory provenance gate was preserved. The previously repository-level CNIPA baseline was localized into the relevant skills so individual installation does not create broken references. The Guidance Planner provenance regression was moved under `cn-patent-invention-mining/examples/`.
 
 ### Presentation
 
-Source: `feiyushaw/presentation_skill`
+Source: `feiyushaw/presentation_skill` at `0bcae01f201c8edac4b9243ffa38534d9b9c7a5d`.
 
-Target: `skills/presentation/`
+Destination: `skills/presentation/`.
 
-Planned skills:
+The existing Slidev skill and its core docs were made self-contained under local references. A new tool-independent `presentation-architect` separates story/slide design from rendering.
 
-- existing `slidev-scientific-presentation`;
-- new `presentation-architect` for tool-independent storyline and slide planning;
-- future `powerpoint-presentation` renderer;
-- future `presentation-review` quality gate.
+### Matt Pocock engineering/productivity adaptations
 
-Migration rule: separate presentation reasoning from rendering technology.
+Source: `mattpocock/skills` at `6654f6b60cd9d5be8b54c6fafe44346dabeb3b76`.
 
-## Phase 3 — Engineering foundation
+Adapted rather than blindly copied. Matt-specific setup, tracker configuration, and personal routing were removed. High-value reusable behaviors were mapped into the monorepo invocation/artifact conventions.
 
-Selectively adapt high-value engineering patterns from `mattpocock/skills`, with attribution:
+See `THIRD_PARTY_NOTICES.md` for licensing and the exact adaptation set.
 
-- `grilling` / `grill-with-docs`
-- `domain-modeling`
-- `codebase-design`
-- `to-spec`
-- `to-tickets`
-- `prototype`
-- `implement`
-- `tdd`
-- `diagnosing-bugs`
-- `code-review`
-- `resolving-merge-conflicts`
-- `wayfinder`
+## Legacy repositories
 
-Do not import upstream skills blindly. Adapt naming, artifact conventions, Codex metadata, and integration points to this repository.
+The source repositories remain intact as historical sources. Do not archive/delete them until the monorepo has been exercised and downstream references have been updated.
 
-## Phase 4 — Integration
+## Future migration work
 
-- finalize pack installer;
-- add catalog generation;
-- add skill dependency checks;
-- add regression examples for high-value workflows;
-- document recommended workflows by job type.
-
-## Phase 5 — Legacy repository retirement
-
-Only after migrated skills are stable:
-
-1. update legacy README files with the new canonical location;
-2. keep historical commit provenance accessible;
-3. optionally archive old repositories;
-4. do not delete source repositories merely to make the monorepo canonical.
-
-## Migration record format
-
-For each migrated skill record:
-
-```text
-source repository
-source commit SHA
-source path
-destination path
-visibility approval
-content changes
-third-party provenance, if any
-validation status
-```
+- update legacy READMEs to point to the canonical monorepo after V1 stabilizes;
+- decide whether to preserve historical examples such as the full MDOC presentation project in a dedicated examples repository/directory;
+- add automated pack installation and dependency validation;
+- add regression fixtures for high-value engineering/research workflows.

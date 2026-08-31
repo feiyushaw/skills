@@ -1,0 +1,3 @@
+interface:
+  display_name: "Slidev Scientific Presentation"
+  short_description: "Implement scientific and technical decks in Slidev"

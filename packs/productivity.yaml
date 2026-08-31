@@ -1,0 +1,10 @@
+name: productivity
+status: stable-v1
+description: Cross-domain user workflows for grilling, handoff, teaching, questionnaires, and re-pitching.
+skills:
+  - grilling
+  - handoff
+  - grill-me
+  - teach
+  - to-questionnaire
+  - wait-what

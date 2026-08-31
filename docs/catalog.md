@@ -1,32 +1,44 @@
 # Skill Catalog
 
-This catalog records the intended V1 topology. A listed planned skill is not considered installed until its `SKILL.md` exists.
+The V1 catalog contains 42 skills across six active domains.
 
-## Core
+## Core — 4
 
-| Skill | Invocation | Status |
+| Skill | Invocation | Role |
 |---|---|---|
-| `workflow-router` | user | bootstrap |
-| `grilling` | model/user | bootstrap |
-| `handoff` | model/user | bootstrap |
-| `writing-for-agents` | model/user | bootstrap |
+| `workflow-router` | user | route a task to the right workflow |
+| `grilling` | model/user | reusable decision-tree/frontier interview discipline |
+| `handoff` | model/user | compact durable cross-agent/session handoff |
+| `writing-for-agents` | model/user | write effective agent-consumed instructions/docs |
 
-## Engineering
+## Engineering — 11
 
-Planned: `grill-with-docs`, `domain-modeling`, `codebase-design`, `to-spec`, `to-tickets`, `prototype`, `implement`, `tdd`, `diagnosing-bugs`, `code-review`, `resolving-merge-conflicts`, `wayfinder`.
+`domain-modeling`, `codebase-design`, `to-spec`, `to-tickets`, `prototype`, `implement`, `tdd`, `diagnosing-bugs`, `code-review`, `resolving-merge-conflicts`, `wayfinder`.
 
-## Research
+The primary flow is `grilling/domain-modeling → to-spec → to-tickets → implement → code-review`. `wayfinder` handles work whose route is not yet clear enough for a spec.
 
-Migration planned from `academic_skills`: `literature-research`, `literature-scout`, `faithful-paper-translation`, `research-idea-refiner`, `research-critic`, `experiment-designer`, `result-harvester`, `scientific-figure`, `result-figure`, `paper-architect`, `chinese-to-academic-english`, `academic-writer`, `manuscript-review`.
+## Research — 15
 
-## Presentation
+`academic-writer`, `chinese-to-academic-english`, `engineering-research`, `experiment-designer`, `faithful-paper-translation`, `literature-research`, `literature-scout`, `manuscript-review`, `method-figure`, `paper-architect`, `research-critic`, `research-idea-refiner`, `result-figure`, `result-harvester`, `scientific-figure`.
 
-Migration/planned: `presentation-architect`, `slidev-scientific-presentation`, `powerpoint-presentation`, `presentation-review`.
+Lifecycle: `Understand → Innovate → Prove → Communicate → Review`.
 
-## Patent
+## Presentation — 2
 
-Migration planned from `patent_skills`: `codebase-patent-diff`, `cn-patent-invention-mining`, `cn-patent-prior-art`, `cn-patent-drafting`, `cn-patent-review`, `autonomous-driving-patent`.
+- `presentation-architect` — tool-independent audience/storyline/slide architecture.
+- `slidev-scientific-presentation` — reproducible Slidev renderer for scientific/technical decks.
 
-## Productivity
+Planned extensions: PowerPoint/PPTX renderer and presentation-review quality gate.
 
-Planned after the core/domain migration stabilizes.
+## Patent — 6
+
+`codebase-patent-diff`, `cn-patent-invention-mining`, `cn-patent-prior-art`, `cn-patent-drafting`, `cn-patent-review`, `autonomous-driving-patent`.
+
+## Productivity — 4
+
+- `grill-me` — explicit thin wrapper over `grilling`.
+- `teach` — persistent multi-session learning workspace.
+- `to-questionnaire` — async discovery questionnaire generator.
+- `wait-what` — context-aware re-pitching.
+
+`handoff` remains in `core` because all domains reuse it.

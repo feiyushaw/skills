@@ -1,0 +1,5 @@
+interface:
+  display_name: "To Questionnaire"
+  short_description: "Turn a knowledge gap into an async questionnaire"
+policy:
+  allow_implicit_invocation: false

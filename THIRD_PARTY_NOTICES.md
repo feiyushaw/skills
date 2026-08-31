@@ -1,17 +1,46 @@
 # Third-party notices
 
-This repository may adapt ideas or code from third-party skill libraries. Each substantial adaptation must preserve the upstream license requirements and be listed here.
-
 ## mattpocock/skills
 
 - Upstream: https://github.com/mattpocock/skills
+- Snapshot used for V1 adaptation: `6654f6b60cd9d5be8b54c6fafe44346dabeb3b76`
 - Author: Matt Pocock
 - License: MIT
 - Copyright: Copyright (c) 2026 Matt Pocock
 - Preserved license text: `licenses/mattpocock-skills-MIT.txt`
 
-The MIT license permits use, modification, merging, publication, distribution, sublicensing, and sale, provided the copyright and permission notice are retained in copies or substantial portions of the software.
+The MIT license permits use, modification, merging, publication, distribution, sublicensing, and sale provided its copyright and permission notice are retained as required.
 
-Planned/adapted concepts include small composable skills, user-invoked versus model-invoked behavior, grilling/frontier-based decision clarification, spec/ticket decomposition, handoff, agent-document writing discipline, and selected engineering workflows.
+### Adapted reusable primitives / architecture
 
-When a skill substantially derives from an upstream skill, add a local provenance note in that skill or extend this file with an explicit mapping.
+- `core/grilling`
+- `core/handoff`
+- `core/writing-for-agents`
+- small composable skills
+- user-invoked vs model-invoked separation
+- decision frontier / persistent artifact patterns
+
+### Adapted productivity skills
+
+- `productivity/grill-me`
+- `productivity/teach`
+- `productivity/to-questionnaire`
+- `productivity/wait-what`
+
+### Adapted engineering skills
+
+- `engineering/domain-modeling`
+- `engineering/codebase-design`
+- `engineering/to-spec`
+- `engineering/to-tickets`
+- `engineering/prototype`
+- `engineering/implement`
+- `engineering/tdd`
+- `engineering/diagnosing-bugs`
+- `engineering/code-review`
+- `engineering/resolving-merge-conflicts`
+- `engineering/wayfinder`
+
+The local versions intentionally remove Matt-specific setup, tracker configuration, and personal routing assumptions, and adapt the workflows to this monorepo's self-contained skill and Codex invocation conventions.
+
+Skills substantially influenced by the upstream should retain this notice even after later local rewrites.

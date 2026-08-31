@@ -1,10 +1,9 @@
 name: engineering
-status: planned
-description: Software engineering workflow from clarification to review.
+status: stable-v1
+description: Software engineering workflow from clarification and domain modeling to implementation and review.
 skills:
   - grilling
   - handoff
-  - grill-with-docs
   - domain-modeling
   - codebase-design
   - to-spec

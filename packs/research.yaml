@@ -1,5 +1,5 @@
 name: research
-status: migration-planned
+status: stable-v1
 description: Research lifecycle from literature understanding to manuscript review.
 skills:
   - grilling
@@ -10,8 +10,10 @@ skills:
   - research-idea-refiner
   - research-critic
   - experiment-designer
+  - engineering-research
   - result-harvester
   - scientific-figure
+  - method-figure
   - result-figure
   - paper-architect
   - chinese-to-academic-english

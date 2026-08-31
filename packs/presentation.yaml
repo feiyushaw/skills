@@ -1,9 +1,9 @@
 name: presentation
-status: migration-planned
-description: Tool-independent presentation planning plus renderers and review.
+status: stable-v1
+description: Tool-independent presentation planning plus a scientific Slidev renderer.
 skills:
   - grilling
   - presentation-architect
   - slidev-scientific-presentation
-  - powerpoint-presentation
-  - presentation-review
+  - scientific-figure
+  - result-figure
