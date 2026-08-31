@@ -7,18 +7,7 @@ description: Collect experiment outputs, configs, seeds, metrics, runtime metada
 
 ## Mission
 
-Turn scattered experiment folders into a traceable evidence package that can be audited, plotted, and connected to paper claims.
-
-This skill owns **result consolidation**, not scientific interpretation by itself.
-
-Use it when:
-
-- multiple experiment runs live in nested directories;
-- metrics are spread across JSON/CSV/text logs;
-- configs/checkpoints/seeds need to be matched to results;
-- the user wants a benchmark summary or evidence table;
-- reproducibility metadata needs to be audited;
-- figures should be generated only from normalized source data.
+Turn scattered experiment folders into a traceable evidence package that can be audited, plotted, and connected to paper claims. This skill owns result consolidation, not scientific interpretation by itself.
 
 ## Non-negotiable rules
 
@@ -32,8 +21,6 @@ Use it when:
 
 ## Canonical evidence package
 
-Prefer this project-local layout:
-
 ```text
 research_evidence/
 ├── manifest.json
@@ -45,145 +32,64 @@ research_evidence/
 └── notes.md
 ```
 
-### `runs.csv`
-
-One row per run. Recommended fields:
-
-- `run_id`
-- `method`
-- `benchmark`
-- `scenario`
-- `seed`
-- `status`
-- `config_path`
-- `result_path`
-- `checkpoint`
-- `git_commit`
-- `data_version`
-- `device`
-- `start_time`
-- `runtime_s`
-- `notes`
-
-### `metrics_long.csv`
-
-One row per metric observation:
-
-- `run_id`
-- `metric`
-- `value`
-- `unit`
-- `direction` (`higher` / `lower` / `target`)
-- `split`
-- `step` or `epoch`, if relevant
-- `source_path`
-
-Long format is preferred because it is easier to audit and plot.
+Use `templates/evidence-manifest.example.json` when useful. `scripts/inventory_results.py` can conservatively inventory candidate experiment artifacts without inventing project-specific metric semantics.
 
 ## Workflow
 
 ### 1. Inventory
 
-Identify:
-
-- experiment roots;
-- run naming conventions;
-- config formats;
-- metric/log formats;
-- code version information;
-- dataset/version identifiers;
-- checkpoint linkage.
-
-Before harvesting, state which file patterns are trusted as sources of truth.
+Identify experiment roots, run naming, config/metric/log formats, code/data versions, and checkpoint linkage. State which artifacts are trusted sources of truth.
 
 ### 2. Normalize run identity
 
-Create a stable `run_id`. Prefer an explicit run identifier if available; otherwise derive one from method + benchmark/scenario + seed + config identity.
+Prefer an explicit run ID; otherwise derive one from method + benchmark/scenario + seed + config identity. Report duplicate/conflicting identities instead of overwriting them.
 
-Detect duplicate or conflicting identities and report them instead of overwriting.
+### 3. Collect comparison metadata
 
-### 3. Collect metadata
-
-Capture the dimensions needed for fair comparison:
-
-- method/variant;
-- benchmark/case/scenario;
-- seed;
-- hyperparameters relevant to the claim;
-- compute budget;
-- model/checkpoint;
-- code revision;
-- data revision;
-- runtime/device when relevant.
+Capture method/variant, benchmark/scenario, seed, relevant hyperparameters, compute budget, checkpoint, code/data revision, runtime/device, and any other dimension needed for fair comparison.
 
 ### 4. Collect metrics
 
-Preserve raw observations. If the source contains time series or per-case metrics, do not replace them with only a mean.
-
-For every metric, track the source file and unit when possible.
+Preserve raw per-run/per-case/per-step observations. Track source file, unit, and metric direction when possible.
 
 ### 5. Capture failures explicitly
 
-A failed run is evidence. Record:
-
-- failure class;
-- last valid stage;
-- error/log path;
-- whether retry occurred;
-- whether the failure is method-specific or infrastructure-related, if known.
+Record failure class, last valid stage, error/log path, retries, and whether infrastructure or method-specific attribution is known. Failed runs are evidence.
 
 ### 6. Audit completeness
 
-Check expected experiment cells against observed runs. Use the experiment matrix from `engineering-research` when present.
-
-Report:
-
-- missing seeds;
-- missing baselines;
-- unmatched configs;
-- missing code/data versions;
-- unequal evaluation budgets;
-- metric schema mismatches;
-- duplicate runs;
-- failed runs.
+Compare observed runs against the experiment matrix from `engineering-research` / `experiment-designer`. Report missing seeds/baselines, unmatched configs, version gaps, unequal budgets, schema mismatches, duplicates, and failed runs.
 
 ### 7. Aggregate only after audit
 
-If aggregation is requested, declare:
+Declare grouping keys, statistic, uncertainty definition, handling of failed/missing runs, and outlier policy. Keep raw tables beside derived aggregates.
 
-- grouping keys;
-- statistic (mean/median/etc.);
-- uncertainty (std/SEM/CI/quantiles);
-- treatment of failed/missing runs;
-- outlier policy.
+## Handoff
 
-Keep the raw tables alongside aggregates.
-
-### 8. Handoff
-
-- To `engineering-research`: provide completeness/fairness findings and the evidence package.
-- To `academic-figure-skill`: provide normalized data tables and metric semantics.
-- To `method-figure`: only pass architecture/method metadata, not quantitative plots.
-- To `academic-research-suite`: provide evidence-backed summaries, never prose unsupported by the harvested records.
+- `engineering-research`: completeness/fairness findings + normalized evidence package.
+- `experiment-designer`: missing cells or controls requiring new experiments.
+- `result-figure`: normalized quantitative data + metric semantics.
+- `paper-architect` / `academic-writer`: evidence-backed summaries and traceability only after claim-evidence audit.
+- `method-figure`: architecture/method metadata only, not quantitative plots.
 
 ## Domain checks
 
 ### FEM / numerical methods
 
-Harvest mesh/DOF, element/order, quadrature, nonlinear/linear solver tolerances, iterations, assembly/solve/post-process times, memory when available, reference-solution identity, and error norms. Distinguish one-time preprocessing from repeated solve cost.
+Harvest mesh/DOF, element/order, quadrature, solver tolerances/iterations, assembly/solve/post-process time, memory, reference-solution identity, and error norms. Distinguish one-time preprocessing from repeated solve cost.
 
 ### Autonomous driving
 
-Harvest dataset/split, scenario IDs, open-loop vs log-replay vs reactive vs interactive closed-loop mode, horizon, planner frequency, latency distribution, collision/off-road/progress/comfort/interaction metrics, and simulator/agent version.
+Harvest dataset/split, scenario IDs, open-loop/log-replay/reactive/interactive mode, horizon, planner frequency, latency distribution, safety/progress/comfort/interaction metrics, and simulator/agent version.
 
 ### Optimization / control
 
-Harvest objective, feasibility, constraint violation, function evaluations, iterations, wall-clock, success/failure, initialization, and random seed. Fair comparisons should retain compute/evaluation budgets.
+Harvest objective, feasibility, constraint violations, function evaluations, iterations, wall-clock, success/failure, initialization, and random seed; retain fair compute/evaluation budgets.
 
 ### ML / AI
 
-Harvest training data/version, checkpoint, seed, training compute when relevant, inference budget, test-time search/sampling budget, and all evaluation splits. Preserve per-seed/per-dataset results.
+Harvest training data/version, checkpoint, seed, training compute where relevant, inference/test-time search budget, and all evaluation splits. Preserve per-seed/per-dataset results.
 
 ## Completion criterion
 
-The harvest is complete only when another researcher can trace each reported result back to a concrete run and source artifact, and the missing/failed portions of the experiment matrix are visible rather than hidden.
+Another researcher must be able to trace every reported result to a concrete run/source artifact, while missing and failed portions remain visible rather than hidden.
