@@ -1,0 +1,5 @@
+interface:
+  display_name: "Presentation Architect"
+  short_description: "Design the story and slide structure before rendering"
+policy:
+  allow_implicit_invocation: false
