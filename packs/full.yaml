@@ -1,9 +1,12 @@
 name: full
 status: stable-v2
-description: All stable Feiyu skill packs. Experimental skills are intentionally excluded.
+description: All stable Feiyu skills. Experimental skills are intentionally excluded.
 includes:
   - engineering
   - research
   - presentation
   - patent
   - productivity
+skills:
+  - workflow-router
+  - writing-for-agents
