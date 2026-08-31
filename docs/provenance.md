@@ -1,6 +1,6 @@
 # Provenance
 
-This document records the source snapshot used for the initial monorepo consolidation.
+This document records source snapshots and major adaptation waves used by the monorepo.
 
 | Destination domain | Source repository | Source commit | Migration type |
 |---|---|---|---|
@@ -9,12 +9,30 @@ This document records the source snapshot used for the initial monorepo consolid
 | `presentation` | `feiyushaw/presentation_skill` | `0bcae01f201c8edac4b9243ffa38534d9b9c7a5d` | owner-controlled content migration + architecture split |
 | `core/engineering/productivity` | `mattpocock/skills` | `6654f6b60cd9d5be8b54c6fafe44346dabeb3b76` | selective MIT-licensed adaptation |
 
+## V2 local extensions
+
+New locally-authored workflow closures include:
+
+- `research/reviewer-response`;
+- `presentation/powerpoint-presentation`;
+- `presentation/presentation-review`;
+- `patent/patent-portfolio-planner`;
+- `experimental/skill-audit`;
+- pack discovery/install tooling.
+
+V2 also adapts additional Matt Pocock patterns into local, environment-decoupled versions:
+
+- `engineering/grill-with-docs`;
+- `engineering/triage`;
+- `engineering/improve-codebase-architecture`;
+- `experimental/retro`.
+
 ## Owner-controlled source repos
 
-Research, patent, and presentation sources are retained as historical repositories. Migration intentionally preserves their conceptual boundaries while adapting paths to the new self-contained skill contract.
+Research, patent, and presentation sources remain available as historical repositories. The monorepo is the canonical active distribution after migration.
 
 ## Third-party adaptation policy
 
 For Matt Pocock-derived work, this repository preserves the upstream MIT license in `licenses/mattpocock-skills-MIT.txt` and records adapted skills in `THIRD_PARTY_NOTICES.md`.
 
-Subsequent major rewrites should keep this provenance record when upstream design materially influenced the local skill.
+Later rewrites should retain provenance whenever upstream design materially influenced the local skill.

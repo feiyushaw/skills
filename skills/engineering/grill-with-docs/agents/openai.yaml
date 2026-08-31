@@ -1,0 +1,5 @@
+interface:
+  display_name: "Grill With Docs"
+  short_description: "Resolve design decisions while maintaining context and ADRs"
+policy:
+  allow_implicit_invocation: false

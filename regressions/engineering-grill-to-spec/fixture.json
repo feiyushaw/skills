@@ -1,0 +1,34 @@
+{
+  "id": "engineering-grill-to-spec",
+  "domain": "engineering",
+  "status": "stable",
+  "workflow": ["grill-me", "grilling", "domain-modeling", "to-spec"],
+  "scenario": {
+    "prompt": "Add an offline mode to an existing CLI. I know users should be able to keep working without network access, but I have not decided cache lifetime, conflict behavior, or which commands must work offline.",
+    "context": [
+      "The repository is available to the agent.",
+      "A CONTEXT.md already defines Workspace, Snapshot, and Sync Attempt.",
+      "Existing code reveals which commands currently call the network."
+    ]
+  },
+  "expected": {
+    "artifacts": ["explicit decision frontier", "updated domain vocabulary when needed", "implementation-ready spec"],
+    "required_behaviors": [
+      "Inspect repository facts instead of asking the user which commands currently use the network.",
+      "Ask the user only material product/design decisions such as cache lifetime and conflict semantics.",
+      "Preserve canonical terms from CONTEXT.md and update the glossary only when a new domain term is actually resolved.",
+      "Do not produce the final spec until material decision frontier items are settled or explicitly marked unresolved.",
+      "The spec records scope, behavior, implementation decisions, testing decisions, and out-of-scope items."
+    ],
+    "forbidden_behaviors": [
+      "Ask the user for facts directly inspectable in the repository.",
+      "Invent cache or conflict semantics to finish the spec.",
+      "Start implementing production code before the requested planning workflow is complete.",
+      "Use a new synonym for an existing canonical domain term without resolving the vocabulary conflict."
+    ],
+    "completion_criteria": [
+      "No material decision is silently assumed.",
+      "The resulting spec can be handed to to-tickets without reopening basic product decisions."
+    ]
+  }
+}

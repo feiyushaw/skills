@@ -1,0 +1,34 @@
+{
+  "id": "engineering-debug-feedback-loop",
+  "domain": "engineering",
+  "status": "stable",
+  "workflow": ["diagnosing-bugs", "tdd", "code-review"],
+  "scenario": {
+    "prompt": "A CLI command intermittently writes an empty output file about one run in fifty after a recent refactor. Fix it.",
+    "context": [
+      "The repository and tests are available.",
+      "The failure is intermittent and the root cause is unknown.",
+      "No existing regression test catches the exact empty-file symptom."
+    ]
+  },
+  "expected": {
+    "artifacts": ["red-capable feedback loop", "ranked falsifiable hypotheses", "regression test or documented missing seam", "verified fix"],
+    "required_behaviors": [
+      "Construct and run a feedback loop that can catch the exact empty-file symptom before committing to a root-cause theory.",
+      "Increase the reproduction rate or determinism enough to debug the intermittent failure.",
+      "Generate multiple falsifiable hypotheses and test them with targeted instrumentation or controlled changes.",
+      "Turn the minimized reproduction into a regression test at the correct seam when such a seam exists.",
+      "Re-run the original feedback loop after the fix and remove temporary instrumentation."
+    ],
+    "forbidden_behaviors": [
+      "Patch the first suspicious code path without a red-capable reproduction signal.",
+      "Claim the bug is fixed because a nearby unit test passes.",
+      "Leave debug logging or throwaway harnesses in production paths without explanation.",
+      "Hide flakiness by retrying until a green run appears."
+    ],
+    "completion_criteria": [
+      "The original symptom no longer reproduces under the established loop.",
+      "The regression is locked down or the absence of a correct test seam is explicitly documented."
+    ]
+  }
+}

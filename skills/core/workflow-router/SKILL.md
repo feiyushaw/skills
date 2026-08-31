@@ -7,40 +7,78 @@ description: Route a user's work request to the smallest suitable skill or skill
 
 ## Mission
 
-Identify the user's current job category and recommend the smallest useful next skill or short skill sequence.
-
-This is a router, not a super-agent.
+Identify the current work product and stage, then select the smallest useful skill or short sequence. This is a router, not a super-agent.
 
 ## Routing process
 
-1. Identify the primary work product: code, research artifact, presentation, patent artifact, or general productivity task.
-2. Identify the current stage. Prefer the skill that starts at the user's actual stage rather than restarting an entire lifecycle.
-3. Inspect `docs/catalog.md` when available to distinguish implemented from planned skills.
-4. Recommend one primary skill. Add a short sequence only when the handoff between stages is already clear.
-5. State why the selected skill fits and what artifact it should produce.
+1. Identify the primary work product: code, research artifact, presentation, patent artifact, productivity task, or repository-maintenance experiment.
+2. Identify the current stage. Do not restart a lifecycle when the user is already downstream.
+3. Prefer one primary skill. Add a short sequence only when the handoff is already clear.
+4. State the expected artifact/output.
+5. Do not route to `experimental` implicitly unless the user explicitly asks for an experimental/maintenance workflow.
 
-## Default routes
+## Common routes
 
 ```text
-software feature / repository change
-  -> engineering workflow
+unclear engineering design
+  → grill-with-docs
 
-research direction / literature / paper / experiments
-  -> research workflow
+incoming issue / external PR
+  → triage
 
-slides / talk / scientific or business presentation
-  -> presentation workflow
+architecture pain / refactor strategy
+  → improve-codebase-architecture
 
-patent mining / prior art / drafting / review
-  -> patent workflow
+settled feature context
+  → to-spec → to-tickets → implement → code-review
+
+large multi-session decision space
+  → wayfinder
+
+broad research landscape
+  → literature-research
+
+research idea / novelty
+  → research-idea-refiner (+ literature-scout / research-critic)
+
+experiment evidence
+  → experiment-designer / engineering-research → result-harvester
+
+paper structure / writing
+  → paper-architect → academic-writer
+
+reviewer comments
+  → reviewer-response
+
+presentation story
+  → presentation-architect
+
+Slidev deck
+  → slidev-scientific-presentation
+
+PowerPoint/PPTX deck
+  → powerpoint-presentation
+
+final deck audit
+  → presentation-review
+
+patent candidate mining
+  → codebase-patent-diff → cn-patent-invention-mining
+
+multiple patent candidates
+  → patent-portfolio-planner
+
+patent search / drafting / review
+  → cn-patent-prior-art → cn-patent-drafting → cn-patent-review
 ```
 
 ## Constraints
 
-- Do not pretend a planned skill is installed.
-- Do not launch multiple expensive workflows merely because they might eventually be useful.
-- Do not replace domain-specific reasoning with router logic.
-- When the user already names a precise skill that fits, route directly to it.
+- do not pretend an unavailable skill exists;
+- do not launch several expensive workflows just because they may eventually be useful;
+- domain-specific judgment stays in domain skills;
+- when the user already names the correct skill, route directly to it;
+- experimental skills require explicit opt-in.
 
 ## Completion
 

@@ -1,0 +1,34 @@
+{
+  "id": "presentation-architecture-render-review",
+  "domain": "presentation",
+  "status": "stable",
+  "workflow": ["presentation-architect", "powerpoint-presentation", "presentation-review"],
+  "scenario": {
+    "prompt": "Create a 15-minute conference presentation from a research manuscript. The audience knows the field but not this method. The paper contains one core equation, a method diagram, two main quantitative results, and one failure case. I need an editable PPTX deck.",
+    "context": [
+      "The manuscript and source figures are available.",
+      "No result may be invented or visually exaggerated.",
+      "The renderer should receive a slide map rather than independently redesigning the scientific story."
+    ]
+  },
+  "expected": {
+    "artifacts": ["audience/goal statement", "storyline and slide map", "editable PPTX plan or deck", "presentation review report"],
+    "required_behaviors": [
+      "Design the narrative before rendering slides and fit it to the 15-minute constraint.",
+      "Use the renderer to implement the approved slide map rather than creating a separate competing storyline.",
+      "Give each slide one primary communication task and keep equations/figures readable at presentation scale.",
+      "Include the failure case or limitation when it materially bounds the claim.",
+      "Review narrative, evidence, visual readability, consistency, and delivery risk after rendering."
+    ],
+    "forbidden_behaviors": [
+      "Mechanically create one slide per manuscript section.",
+      "Invent quantitative results, citations, equations, or method claims.",
+      "Use dense body text to compensate for an unclear storyline.",
+      "Let the renderer silently alter scientific claims or omit a material limitation to make the deck look stronger."
+    ],
+    "completion_criteria": [
+      "The final deck can be traced back to the architected slide map and source evidence.",
+      "Presentation review has no unresolved blocker affecting scientific correctness or projected readability."
+    ]
+  }
+}

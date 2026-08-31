@@ -1,48 +1,61 @@
 # Feiyu Skills
 
-面向 Codex、Claude Code 及其他代码/科研 Agent 的可组合 Skill 仓库。
+面向 Codex、Claude Code 及其他代码/科研 Agent 的可组合个人 Skill Monorepo。
 
-这个仓库现在是个人工作 Skills 的统一主仓库：代码开发、科研、Presentation、专利和通用效率工具按工作类别组织；跨领域复用的行为原语放在 `core`；`packs` 只负责组合安装。
+仓库按照实际工作类别组织；跨领域复用的交互/上下文原语放在 `core`；`packs` 负责安装组合；`experimental` 用于尚未经过足够实际使用验证的新能力。
 
 ## 工作类别
 
-| 类别 | 主要用途 | V1 状态 |
+| 类别 | 主要用途 | 状态 |
 |---|---|---|
 | `core` | 路由、Grilling、Handoff、Agent 文档规范 | 稳定 |
-| `engineering` | Spec、Tickets、架构、实现、TDD、调试、Review、长任务规划 | 核心集已完成 |
-| `research` | 文献、创新提炼、实验、证据、科研绘图、论文组织/写作/审稿 | 已迁移 |
-| `presentation` | 与工具无关的汇报架构 + Slidev 科研演示 | 已迁移，继续扩展 |
-| `patent` | 中国发明专利：来源边界、挖掘、检索、撰写、审查 | 已迁移 |
-| `productivity` | GrillMe、教学、问卷、重新解释、Handoff | 核心集已完成 |
-| `experimental` | 尚未稳定的新 Skill | 保留 |
+| `engineering` | 澄清、Spec、Tickets、架构、实现、TDD、调试、Review、Issue Triage、长任务规划 | 稳定 V2 |
+| `research` | 文献、创新提炼、实验、证据、科研绘图、论文组织/写作/审稿/Reviewer Response | 稳定 V2 |
+| `presentation` | 汇报架构、Slidev、PPTX、最终 Review | 基本闭环 |
+| `patent` | 中国发明专利：来源边界、挖掘、组合规划、检索、撰写、审查 | 稳定 V2 |
+| `productivity` | GrillMe、教学、问卷、重新解释、Handoff | 稳定 |
+| `experimental` | Session Retro、Skill Audit 等尚未稳定的能力 | 显式安装 |
 
-## 当前主工作流
+当前共 **51 个 skills**；`full` 默认安装 49 个稳定 skills，不包含 `experimental`。
 
-### Engineering
+## Engineering
 
 ```text
-idea / task
-  ↓
-grilling / domain-modeling
-  ↓
-to-spec
-  ↓
-to-tickets
-  ↓
-implement
-  ├── prototype
-  ├── tdd
-  └── diagnosing-bugs
-  ↓
-code-review
+incoming issue / PR ──→ triage
+                         |
+idea / design ──→ grill-with-docs
+                  ↓
+          domain-modeling
+                  ↓
+              to-spec
+                  ↓
+            to-tickets
+                  ↓
+             implement
+          ┌───────┼────────┐
+       prototype  tdd  diagnosing-bugs
+                  ↓
+             code-review
 ```
 
-大规模、跨上下文且路线尚不清楚的任务先用 `wayfinder`。
-
-### Research
+架构维护使用：
 
 ```text
-Understand → Innovate → Prove → Communicate → Review
+codebase-design
+      ↓
+improve-codebase-architecture
+      ↓
+grilling / domain-modeling
+      ↓
+to-spec
+```
+
+跨多个上下文、路线尚不清楚的大任务使用 `wayfinder`。
+
+## Research
+
+```text
+Understand → Innovate → Prove → Communicate → Review → Respond
 
 literature-research
   ↓
@@ -57,32 +70,35 @@ paper-architect
 chinese-to-academic-english / academic-writer
   ↓
 manuscript-review
-```
-
-科研域继续坚持：
-
-```text
-Contribution → Claim → Required Evidence → Experiment / Analysis
-→ Figure / Table → Paper Section
-```
-
-语言层不能静默改变科学层。
-
-### Presentation
-
-```text
-source material + audience + goal
   ↓
+reviewer-response
+```
+
+Reviewer 要求新实验、补文献或重构论文时，`reviewer-response` 会把任务重新路由回对应的科研 skill，而不是把所有问题都当成语言润色。
+
+## Presentation
+
+```text
+source + audience + goal
+        ↓
 presentation-architect
-  ↓
-storyline / slide map / visual requirements
-  ↓
-slidev-scientific-presentation
+        ↓
+storyline / slide map / visual contract
+        ↓
+   ┌────┴─────┐
+ Slidev      PPTX
+   ↓           ↓
+slidev-      powerpoint-
+scientific-  presentation
+presentation
+   └────┬─────┘
+        ↓
+presentation-review
 ```
 
-Presentation 的“怎么讲”与“用什么工具生成”已经拆开。PowerPoint/PPTX renderer 是下一阶段扩展。
+这样“怎么讲”“用什么 renderer”“最终质量检查”已经分层。
 
-### Patent
+## Patent
 
 ```text
 code / architecture / experiments
@@ -91,6 +107,8 @@ codebase-patent-diff
   ↓
 cn-patent-invention-mining
   ↓
+patent-portfolio-planner   # 多候选时
+  ↓
 cn-patent-prior-art
   ↓
 cn-patent-drafting
@@ -98,46 +116,47 @@ cn-patent-drafting
 cn-patent-review
 ```
 
-专利工作流保留 provenance gate：仓库所有权、代码复杂度、大 diff 都不能自动等同于申请人的可专利发明。
+继续保留 provenance gate：仓库所有权、代码复杂度和大 diff 都不能自动等同于申请人的可专利发明。
 
-### Productivity
+## Productivity 与 Experimental
 
-`grill-me` 是显式用户入口，本身保持很薄，只启动 `core/grilling`。这样 Grilling 的 decision-tree/frontier 逻辑可以被工程、科研、Presentation 和专利共同复用，而不复制四份。
+`grill-me` 是显式用户入口，底层复用 `core/grilling`。`handoff` 位于 core，因为它被所有工作域复用。
 
-另外提供 `teach`、`to-questionnaire`、`wait-what` 和 core `handoff`。
+`experimental/retro` 用来从一次 Agent 工作中提炼环境改进；`experimental/skill-audit` 用来检查 skill 重叠、路由冲突、自包含、Pack 与安装问题。实验 Skill 不进入 `full`。
 
-## 统一设计原则
+## 使用
 
-1. Skill 是边界清楚的行为原语或领域工作流，不做巨大 Prompt 集合。
-2. Agent 能自行检查的事实由 Agent 调查；用户主要回答真正的决策。
-3. 长任务将重要状态写入 Spec、Tickets、CONTEXT/ADR、Research Map、Claim-Evidence、Patent Candidate、Handoff 等持久产物。
-4. 领域专业判断留在领域 Skill；通用交互机制才进入 `core`。
-5. `SKILL.md` 放通用规则，分支性细节放当前 Skill 自己的 `references/templates/scripts`。
-6. 每个 Skill 默认可独立安装，不依赖脆弱的跨目录相对路径。
-7. 大型 orchestrator 默认禁止隐式触发；可复用 primitive 可以由模型按需调用。
-8. 第三方 Skill 保留来源和许可证。
+列出 skills：
 
-## Packs
+```bash
+python3 scripts/list-skills.py
+python3 scripts/list-skills.py --domain research
+```
 
-当前有：`engineering`、`research`、`presentation`、`patent`、`productivity` 和 `full`。
-
-## 迁移来源
-
-- `feiyushaw/academic_skills` → `skills/research/`
-- `feiyushaw/patent_skills` → `skills/patent/`
-- `feiyushaw/presentation_skill` → `skills/presentation/`
-- `mattpocock/skills` 中筛选并适配的通用工程/效率方法 → `core / engineering / productivity`
-
-具体来源 commit 和适配说明见 [docs/provenance.md](docs/provenance.md)；第三方许可证见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。
-
-## 开发检查
+校验：
 
 ```bash
 python3 scripts/validate-skills.py
 ```
 
-GitHub Actions 会执行相同结构校验。
+安装 Pack 时显式指定目标目录：
 
-## 下一步
+```bash
+python3 scripts/install-pack.py engineering --target /path/to/agent/skills --dry-run
+python3 scripts/install-pack.py full --target /path/to/agent/skills
+```
 
-下一阶段优先补 `powerpoint-presentation`、`presentation-review`、Pack 安装脚本/自动 Catalog，以及关键工作流的 regression fixtures。旧仓库暂时保留作为历史来源，不急于删除或 archive。
+详细说明见 [docs/using-skills.md](docs/using-skills.md)。
+
+## 设计原则
+
+1. Skill 是边界清楚的行为原语或领域工作流，不做巨大 Prompt 集合。
+2. Agent 能自行调查的事实由 Agent 调查；用户主要回答决策。
+3. 长任务把状态写入明确的持久产物，而不是无限依赖聊天上下文。
+4. 领域判断留在领域 Skill；跨领域重复行为才进入 `core`。
+5. 一个 skill 单独安装后应仍可理解和工作。
+6. 大型 orchestrator 默认禁止隐式触发。
+7. `experimental` 必须经过重复实际使用后再提升为稳定 Pack。
+8. 第三方来源与许可证持续保留。
+
+完整目录见 [docs/catalog.md](docs/catalog.md)，来源记录见 [docs/provenance.md](docs/provenance.md)。

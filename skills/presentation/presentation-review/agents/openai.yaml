@@ -1,0 +1,5 @@
+interface:
+  display_name: "Presentation Review"
+  short_description: "Audit a deck for narrative, evidence, visual, and delivery risks"
+policy:
+  allow_implicit_invocation: false

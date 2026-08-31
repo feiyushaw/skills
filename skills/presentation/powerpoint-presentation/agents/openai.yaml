@@ -1,0 +1,5 @@
+interface:
+  display_name: "PowerPoint Presentation"
+  short_description: "Render an approved presentation plan as an editable PPTX"
+policy:
+  allow_implicit_invocation: false

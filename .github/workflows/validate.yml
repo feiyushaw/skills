@@ -14,3 +14,7 @@ jobs:
           python-version: "3.12"
       - name: Validate skill structure
         run: python3 scripts/validate-skills.py
+      - name: Validate regression fixtures
+        run: python3 scripts/validate-regressions.py
+      - name: Smoke test pack distribution
+        run: python3 scripts/smoke-test-distribution.py

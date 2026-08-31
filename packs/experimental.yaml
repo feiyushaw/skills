@@ -1,0 +1,6 @@
+name: experimental
+status: experimental
+description: Unstable repository-maintenance and agent-environment experiments. Not included by the full pack.
+skills:
+  - retro
+  - skill-audit
