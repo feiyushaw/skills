@@ -1,6 +1,6 @@
 name: full
-status: stable-v1
-description: Full Feiyu skill stack.
+status: stable-v2
+description: All stable Feiyu skill packs. Experimental skills are intentionally excluded.
 includes:
   - engineering
   - research

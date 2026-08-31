@@ -27,7 +27,6 @@ def parse_frontmatter(text: str) -> dict[str, str]:
 
 
 def parse_simple_yaml_list(text: str, key: str) -> list[str]:
-    """Parse the flat list shape used by pack manifests without PyYAML."""
     values: list[str] = []
     active = False
     for raw in text.splitlines():
@@ -43,6 +42,37 @@ def parse_simple_yaml_list(text: str, key: str) -> list[str]:
             if stripped and not line.startswith(" "):
                 break
     return values
+
+
+def parse_simple_yaml_scalar(text: str, key: str) -> str | None:
+    for raw in text.splitlines():
+        if raw.startswith(f"{key}:"):
+            return raw.split(":", 1)[1].strip().strip('"')
+    return None
+
+
+def find_pack_cycles(pack_includes: dict[str, list[str]]) -> list[str]:
+    errors: list[str] = []
+    visiting: set[str] = set()
+    visited: set[str] = set()
+
+    def visit(name: str, path: tuple[str, ...]) -> None:
+        if name in visiting:
+            cycle = " -> ".join((*path, name))
+            errors.append(f"pack include cycle: {cycle}")
+            return
+        if name in visited:
+            return
+        visiting.add(name)
+        for child in pack_includes.get(name, []):
+            if child in pack_includes:
+                visit(child, (*path, name))
+        visiting.remove(name)
+        visited.add(name)
+
+    for pack in pack_includes:
+        visit(pack, ())
+    return errors
 
 
 def main() -> int:
@@ -79,19 +109,31 @@ def main() -> int:
             )
 
     pack_names = {p.stem for p in PACKS.glob("*.yaml")} if PACKS.exists() else set()
+    pack_includes: dict[str, list[str]] = {}
     if not PACKS.exists():
         errors.append("packs/ directory is missing")
     else:
         for pack in sorted(PACKS.glob("*.yaml")):
             text = pack.read_text(encoding="utf-8")
+            manifest_name = parse_simple_yaml_scalar(text, "name")
+            if manifest_name != pack.stem:
+                errors.append(f"{pack}: name must equal '{pack.stem}'")
+            if not parse_simple_yaml_scalar(text, "description"):
+                errors.append(f"{pack}: description is required")
+
             for skill in parse_simple_yaml_list(text, "skills"):
                 if skill not in skill_names:
                     errors.append(f"{pack}: references missing skill '{skill}'")
-            for included in parse_simple_yaml_list(text, "includes"):
+
+            includes = parse_simple_yaml_list(text, "includes")
+            pack_includes[pack.stem] = includes
+            for included in includes:
                 if included not in pack_names:
                     errors.append(f"{pack}: includes missing pack '{included}'")
                 if included == pack.stem:
                     errors.append(f"{pack}: pack may not include itself")
+
+        errors.extend(find_pack_cycles(pack_includes))
 
     if errors:
         print("Skill validation failed:")

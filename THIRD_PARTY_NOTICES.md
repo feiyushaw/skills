@@ -3,7 +3,7 @@
 ## mattpocock/skills
 
 - Upstream: https://github.com/mattpocock/skills
-- Snapshot used for V1 adaptation: `6654f6b60cd9d5be8b54c6fafe44346dabeb3b76`
+- Snapshot used for the initial V1/V2 adaptation: `6654f6b60cd9d5be8b54c6fafe44346dabeb3b76`
 - Author: Matt Pocock
 - License: MIT
 - Copyright: Copyright (c) 2026 Matt Pocock
@@ -29,8 +29,11 @@ The MIT license permits use, modification, merging, publication, distribution, s
 
 ### Adapted engineering skills
 
+- `engineering/grill-with-docs`
+- `engineering/triage`
 - `engineering/domain-modeling`
 - `engineering/codebase-design`
+- `engineering/improve-codebase-architecture`
 - `engineering/to-spec`
 - `engineering/to-tickets`
 - `engineering/prototype`
@@ -41,6 +44,10 @@ The MIT license permits use, modification, merging, publication, distribution, s
 - `engineering/resolving-merge-conflicts`
 - `engineering/wayfinder`
 
-The local versions intentionally remove Matt-specific setup, tracker configuration, and personal routing assumptions, and adapt the workflows to this monorepo's self-contained skill and Codex invocation conventions.
+### Experimental adaptations
 
-Skills substantially influenced by the upstream should retain this notice even after later local rewrites.
+- `experimental/retro`
+
+The local versions intentionally remove Matt-specific setup, tracker configuration, personal routing assumptions, and environment-specific output requirements. They retain the reusable behavior and are adapted to this monorepo's self-contained skill and Codex invocation conventions.
+
+Skills materially influenced by the upstream should retain this notice even after later local rewrites.
