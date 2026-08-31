@@ -1,85 +1,47 @@
 ---
 name: workflow-router
-description: Route a user's work request to the smallest suitable skill or skill sequence in this repository. Use when the user asks which workflow to use, invokes a general work request without a clear skill, or wants to discover available capabilities. Do not perform the full downstream workflow unless explicitly asked.
+description: Route a user's work request to the smallest suitable skill or short skill sequence in this repository. Use when the task is general, the correct workflow is unclear, or the user wants capability discovery. Do not perform the full downstream workflow unless asked.
 ---
 
 # Workflow Router
 
-## Mission
-
-Identify the current work product and stage, then select the smallest useful skill or short sequence. This is a router, not a super-agent.
-
-## Routing process
+## Process
 
 1. Identify the primary work product: code, research artifact, presentation, patent artifact, productivity task, or repository-maintenance experiment.
-2. Identify the current stage. Do not restart a lifecycle when the user is already downstream.
-3. Prefer one primary skill. Add a short sequence only when the handoff is already clear.
-4. State the expected artifact/output.
-5. Do not route to `experimental` implicitly unless the user explicitly asks for an experimental/maintenance workflow.
+2. Identify the current lifecycle stage; do not restart upstream work unnecessarily.
+3. Prefer one primary skill and add a short sequence only when the handoff is clear.
+4. State the expected output.
+5. Never route to `experimental` implicitly.
 
 ## Common routes
 
 ```text
-unclear engineering design
-  → grill-with-docs
+unclear engineering design       → grill-with-docs
+incoming issue / external PR     → triage
+architecture pain                → improve-codebase-architecture
+settled feature                  → to-spec → to-tickets → implement → code-review
+multi-session unknown route      → wayfinder
 
-incoming issue / external PR
-  → triage
+broad literature / closest work  → literature-research
+raw research idea                → research-idea-refiner
+experiments / claim evidence     → engineering-research → result-harvester
+conceptual paper figure          → method-figure
+quantitative evidence figure     → result-figure
+paper structure                  → paper-architect → academic-writer
+academic EN↔ZH translation       → academic-translation
+submission readiness             → manuscript-review
+reviewer comments                → reviewer-response
 
-architecture pain / refactor strategy
-  → improve-codebase-architecture
+presentation story               → presentation-architect
+Slidev renderer                  → slidev-scientific-presentation
+PowerPoint renderer              → powerpoint-presentation
+final deck audit                 → presentation-review
 
-settled feature context
-  → to-spec → to-tickets → implement → code-review
-
-large multi-session decision space
-  → wayfinder
-
-broad research landscape
-  → literature-research
-
-research idea / novelty
-  → research-idea-refiner (+ literature-scout / research-critic)
-
-experiment evidence
-  → experiment-designer / engineering-research → result-harvester
-
-paper structure / writing
-  → paper-architect → academic-writer
-
-reviewer comments
-  → reviewer-response
-
-presentation story
-  → presentation-architect
-
-Slidev deck
-  → slidev-scientific-presentation
-
-PowerPoint/PPTX deck
-  → powerpoint-presentation
-
-final deck audit
-  → presentation-review
-
-patent candidate mining
-  → codebase-patent-diff → cn-patent-invention-mining
-
-multiple patent candidates
-  → patent-portfolio-planner
-
-patent search / drafting / review
-  → cn-patent-prior-art → cn-patent-drafting → cn-patent-review
+patent source/provenance         → codebase-patent-diff → cn-patent-invention-mining
+multiple patent candidates       → patent-portfolio-planner
+prior art / drafting / review    → cn-patent-prior-art → cn-patent-drafting → cn-patent-review
 ```
 
 ## Constraints
 
-- do not pretend an unavailable skill exists;
-- do not launch several expensive workflows just because they may eventually be useful;
-- domain-specific judgment stays in domain skills;
-- when the user already names the correct skill, route directly to it;
-- experimental skills require explicit opt-in.
-
-## Completion
-
-Stop when the user has a concrete next skill or short workflow and understands the expected output.
+Use only installed skills; do not launch several expensive workflows just because they may eventually be useful; domain judgment stays in domain skills; experimental skills require explicit opt-in.

@@ -1,0 +1,5 @@
+interface:
+  display_name: "Academic Translation"
+  short_description: "Translate academic text without changing the science"
+policy:
+  allow_implicit_invocation: true
