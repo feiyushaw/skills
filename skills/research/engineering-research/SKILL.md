@@ -168,7 +168,7 @@ Before generating a major figure, write a short figure contract:
 - **Reference/baseline:** clearly visible.
 - **Output:** prefer vector master for publication figures.
 
-For quantitative publication plots, hand off to a dedicated scientific-figure skill when available. For method/workflow diagrams, follow `references/figure-design.md`.
+For quantitative publication plots, hand off to `result-figure` when available. For conceptual method/workflow diagrams, hand off to `scientific-figure` or follow `references/figure-design.md`.
 
 ## Handoff to literature and writing skills
 
