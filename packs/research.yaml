@@ -1,6 +1,6 @@
 name: research
-status: stable-v1
-description: Research lifecycle from literature understanding to manuscript review.
+status: stable-v2
+description: Research lifecycle from literature understanding and evidence generation to manuscript and reviewer response.
 skills:
   - grilling
   - handoff
@@ -19,3 +19,4 @@ skills:
   - chinese-to-academic-english
   - academic-writer
   - manuscript-review
+  - reviewer-response

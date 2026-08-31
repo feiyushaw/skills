@@ -1,0 +1,5 @@
+interface:
+  display_name: "Retro"
+  short_description: "Turn session friction into durable agent-environment improvements"
+policy:
+  allow_implicit_invocation: false

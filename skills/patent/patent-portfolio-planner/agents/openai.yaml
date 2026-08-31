@@ -1,0 +1,5 @@
+interface:
+  display_name: "Patent Portfolio Planner"
+  short_description: "Prioritize and structure multiple invention candidates for filing"
+policy:
+  allow_implicit_invocation: false

@@ -1,0 +1,5 @@
+interface:
+  display_name: "Reviewer Response"
+  short_description: "Plan revisions and write evidence-grounded peer-review responses"
+policy:
+  allow_implicit_invocation: false

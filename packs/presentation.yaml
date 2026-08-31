@@ -1,9 +1,10 @@
 name: presentation
-status: stable-v1
-description: Tool-independent presentation planning plus a scientific Slidev renderer.
+status: stable-v2
+description: Tool-independent presentation architecture with Slidev/PPTX renderers and a final review gate.
 skills:
   - grilling
+  - handoff
   - presentation-architect
   - slidev-scientific-presentation
-  - scientific-figure
-  - result-figure
+  - powerpoint-presentation
+  - presentation-review

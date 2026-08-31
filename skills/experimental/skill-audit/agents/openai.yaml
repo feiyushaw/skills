@@ -1,0 +1,5 @@
+interface:
+  display_name: "Skill Audit"
+  short_description: "Audit a skill collection for overlap, routing, and maintainability"
+policy:
+  allow_implicit_invocation: false

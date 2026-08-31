@@ -1,11 +1,12 @@
 name: patent
-status: stable-v1
-description: Chinese invention patent workflow with provenance-aware invention mining.
+status: stable-v2
+description: Chinese invention-patent workflow with provenance-aware mining, portfolio planning, prior art, drafting, and review.
 skills:
   - grilling
   - handoff
   - codebase-patent-diff
   - cn-patent-invention-mining
+  - patent-portfolio-planner
   - cn-patent-prior-art
   - cn-patent-drafting
   - cn-patent-review
