@@ -8,6 +8,7 @@ This repository may adapt ideas or code from third-party skill libraries. Each s
 - Author: Matt Pocock
 - License: MIT
 - Copyright: Copyright (c) 2026 Matt Pocock
+- Preserved license text: `licenses/mattpocock-skills-MIT.txt`
 
 The MIT license permits use, modification, merging, publication, distribution, sublicensing, and sale, provided the copyright and permission notice are retained in copies or substantial portions of the software.
 
