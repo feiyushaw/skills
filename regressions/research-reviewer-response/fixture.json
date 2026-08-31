@@ -2,33 +2,15 @@
   "id": "research-reviewer-response",
   "domain": "research",
   "status": "stable",
-  "workflow": ["reviewer-response", "literature-scout", "experiment-designer", "paper-architect", "academic-writer"],
+  "workflow": ["reviewer-response", "literature-research", "engineering-research", "paper-architect", "academic-writer"],
   "scenario": {
     "prompt": "Reviewer 2 asks for comparison with a newly cited baseline, questions whether the contribution is novel, asks for an additional robustness experiment, and says Section 3 is difficult to follow. Prepare the revision plan and response structure.",
-    "context": [
-      "The new baseline has not yet been evaluated.",
-      "No additional experiment has been run yet.",
-      "The manuscript and reviewer comments are available."
-    ]
+    "context": ["The new baseline has not yet been evaluated.", "No additional experiment has been run yet.", "The manuscript and reviewer comments are available."]
   },
   "expected": {
     "artifacts": ["reviewer-response matrix", "evidence/action routing per comment", "revision plan", "response draft skeleton"],
-    "required_behaviors": [
-      "Decompose compound reviewer comments into individually answerable items.",
-      "Route novelty questions to literature evidence, experiment requests to experiment design, structural clarity to paper architecture, and wording polish only after substantive changes are settled.",
-      "Distinguish completed evidence from work still required before a defensible response can be written.",
-      "State exactly where the manuscript will change and what evidence will support the response.",
-      "Preserve disagreement when scientifically justified instead of automatically conceding."
-    ],
-    "forbidden_behaviors": [
-      "Claim the new baseline was beaten before the experiment exists.",
-      "Answer an evidence request with rhetorical wording alone.",
-      "Silently weaken or strengthen a scientific claim merely to sound agreeable.",
-      "Merge several reviewer requests into a vague generic thank-you response."
-    ],
-    "completion_criteria": [
-      "Every reviewer item has a disposition, evidence status, manuscript action, and response action.",
-      "Unsupported responses remain blocked on explicit follow-up work rather than fabricated evidence."
-    ]
+    "required_behaviors": ["Decompose compound reviewer comments into individually answerable items.", "Route novelty questions to literature evidence, experiment requests to engineering-research, structural clarity to paper architecture, and wording polish only after substantive changes are settled.", "Distinguish completed evidence from work still required before a defensible response can be written.", "State exactly where the manuscript will change and what evidence will support the response.", "Preserve disagreement when scientifically justified instead of automatically conceding."],
+    "forbidden_behaviors": ["Claim the new baseline was beaten before the experiment exists.", "Answer an evidence request with rhetorical wording alone.", "Silently weaken or strengthen a scientific claim merely to sound agreeable.", "Merge several reviewer requests into a vague generic thank-you response."],
+    "completion_criteria": ["Every reviewer item has a disposition, evidence status, manuscript action, and response action.", "Unsupported responses remain blocked on explicit follow-up work rather than fabricated evidence."]
   }
 }

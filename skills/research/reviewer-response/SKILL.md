@@ -1,76 +1,46 @@
 ---
 name: reviewer-response
-description: Build evidence-grounded responses to academic peer-review comments and revise the manuscript accordingly. Use after receiving reviewer or editor comments when the user needs a response matrix, rebuttal/revision strategy, manuscript changes, or a point-by-point response without inventing new evidence.
+description: Build evidence-grounded responses to academic peer-review comments and revise the manuscript accordingly. Use after receiving reviewer/editor comments for response matrices, rebuttal/revision strategy, manuscript changes, and point-by-point responses without inventing new evidence.
 ---
 
 # Reviewer Response
 
 ## Mission
 
-Turn reviewer comments into a traceable revision program and a professional point-by-point response while preserving scientific accuracy.
+Turn reviewer comments into a traceable revision program and professional point-by-point response while preserving scientific accuracy.
 
-## First pass: classify every comment
+## First pass
 
-Use categories such as:
-
-- misunderstanding / clarity;
-- missing citation or positioning;
-- missing analysis or experiment;
-- method/reproducibility concern;
-- unsupported or overstated claim;
-- scope/limitation concern;
-- presentation/figure/table issue;
-- reviewer disagreement requiring evidence-based explanation.
-
-Do not treat all comments as writing problems.
-
-## Response matrix
+Classify each comment as clarity, literature/positioning, missing evidence/experiment, method/reproducibility, unsupported claim, scope/limitation, figure/table, or evidence-backed disagreement.
 
 Maintain:
 
 | ID | Reviewer comment | Underlying concern | Action | Evidence needed | Manuscript location | Status |
 |---|---|---|---|---|---|---|
 
-For every comment, determine whether the correct action is:
+For every item choose: accept/revise; clarify; add evidence; narrow/qualify claim; respectfully disagree with evidence; or explain scope.
 
-1. accept and revise;
-2. clarify without changing the science;
-3. add evidence/analysis;
-4. narrow or qualify a claim;
-5. respectfully disagree with evidence;
-6. explain why the requested change is outside scope.
-
-## Point-by-point response structure
-
-For each comment:
+## Response structure
 
 ```text
 Reviewer comment
 Response
 What changed
 Where changed
-Evidence / citation, when applicable
+Evidence / citation when applicable
 ```
 
-A useful response usually follows:
+Do not claim experiments or manuscript changes that do not exist.
 
-```text
-acknowledge the concern
-→ state the action or position directly
-→ provide evidence/reasoning
-→ identify the manuscript change precisely
-```
+## Routing substantive work
 
-Avoid empty politeness, defensive language, and claims that the manuscript was changed when it was not.
-
-## Handoffs
-
-- new experiment or confounder → `experiment-designer` / `engineering-research`;
-- novelty or citation threat → `literature-scout`;
-- section architecture problem → `paper-architect`;
-- prose revision → `academic-writer`;
-- claim unsupported after review → narrow it or obtain evidence; never fabricate support.
+- novelty, missing citation, closest-work comparison → `literature-research`;
+- new experiment, baseline, robustness, confounder → `engineering-research`;
+- section architecture / idea placement → `paper-architect`;
+- conceptual or quantitative visual changes → `method-figure` / `result-figure`;
+- prose revision only after substantive changes settle → `academic-writer`;
+- translation of response/manuscript text without scientific change → `academic-translation`.
 
 ## Completion
 
-Every reviewer comment must be closed by either a concrete manuscript action, an evidence-backed explanation, or an explicit unresolved item. Run a final consistency audit so the response letter, manuscript, figures, and stated line/section locations agree.
+Every reviewer item must end with a concrete manuscript action, evidence-backed explanation, or explicit unresolved blocker. Run a final consistency audit so response letter, manuscript, figures, results, and stated locations agree.

@@ -1,160 +1,58 @@
 ---
 name: academic-writer
-description: Draft and revise academic prose from an approved paper blueprint, contribution map, evidence, figures/tables, and verified citations. Use for paragraph-level writing, Introduction/Method/Results execution, transitions, reverse-outline revision, captions/tables, concise technical exposition, LaTeX-ready prose, and language revision. Do not invent claims, evidence, citations, or restructure the paper silently.
+description: Draft and revise academic prose from an approved paper blueprint, contribution/claim map, evidence, figures/tables, and verified citations. Own paragraph and section writing execution; do not invent evidence/citations or silently redesign the paper or strengthen claims.
 ---
 
 # Academic Writer
 
 ## Mission
 
-Convert an approved scientific argument into precise, reviewer-friendly academic prose without changing the underlying science.
+Convert an approved scientific argument into precise academic prose without changing the underlying science.
 
-This skill owns **writing execution**, not novelty formation or paper architecture.
+Preferred inputs: blueprint/section map from `paper-architect`, stable claims, evidence, figures/tables, verified citations, and terminology/notation conventions.
 
-## Inputs
+If scientific logic is unstable, route upstream instead of hiding the problem with fluent prose.
 
-Prefer to consume:
-
-- paper blueprint and section map from `paper-architect`;
-- contribution/claim map;
-- evidence, figures, and tables;
-- verified citations;
-- terminology and notation conventions.
-
-If the scientific logic is unstable, route back to `research-idea-refiner`, `experiment-designer`, or `paper-architect` instead of hiding problems with fluent prose.
-
-## Core writing workflow
+## Workflow
 
 ```text
 approved section contract
 → mini-outline / paragraph roles
-→ paragraph drafting
+→ drafting
 → sentence-flow audit
 → reverse outline
 → claim-evidence audit
 → terminology / caption / table audit
 ```
 
-Load only the references needed for the current task:
+Use local references as needed:
 
-- paragraph flow / reverse outline: `references/paragraph-flow.md`;
-- Introduction execution: `references/introduction-craft.md`;
-- Method subsection execution: `references/method-craft.md`;
-- figure/table/caption presentation: `references/presentation-quality.md`.
+- `references/paragraph-flow.md`;
+- `references/introduction-craft.md`;
+- `references/method-craft.md`;
+- `references/presentation-quality.md`.
 
-## Paragraph contract
+## Writing rules
 
-Draft each paragraph around:
+- one paragraph should usually carry one dominant scientific message;
+- preserve claim strength and uncertainty;
+- distinguish observation, interpretation, hypothesis, and speculation;
+- never invent citations, results, advantages, experimental details, or limitations;
+- keep terminology/notation consistent with methods, equations, figures, and tables;
+- when a claim lacks evidence, weaken/remove it or route upstream for evidence.
 
-```text
-role → topic claim → support/reasoning → qualification → transition
-```
+## Section roles
 
-Prefer **one paragraph = one dominant scientific message**.
+Abstract compresses the actual paper argument and cannot be stronger than the body. Introduction moves from problem/current paradigm to technical challenge, insight, approach, evidence preview, and contributions. Related Work synthesizes conceptual dimensions established by `literature-research`. Method explains motivation/design/mechanism rather than only implementation. Results state observations before interpretation and trace claims to evidence.
 
-The opening sentence should usually expose the paragraph's job. Each following sentence should have a clear relation to what precedes it: cause, contrast, consequence, refinement, evidence, definition, example, or limitation.
+## Boundary with translation
 
-After drafting a section, use reverse outlining:
-
-```text
-paragraph topic → section thesis
-support/evidence → paragraph topic
-```
-
-A paragraph that cannot be mapped cleanly is a candidate for relocation, deletion, or rewriting.
-
-## Global writing rules
-
-- Preserve claim strength: do not turn `suggests` into `demonstrates`.
-- Never invent citations, experimental details, or advantages.
-- Prefer precise verbs and concrete subjects over generic academic filler.
-- Define technical terms before relying on them.
-- Keep terminology and notation stable across sections and visuals.
-- Distinguish observation, interpretation, hypothesis, and speculation.
-- State limitations where evidence warrants them.
-- Avoid redundant repetition; allow deliberate callbacks when rhetorical depth changes.
-- If a claim lacks evidence, weaken/remove it or route upstream for new evidence.
-
-## Section behavior
-
-### Abstract
-
-Compress the paper's actual argument: problem → gap/challenge → approach → evidence → takeaway. Do not introduce claims that are stronger than the body.
-
-### Introduction
-
-Use `references/introduction-craft.md`.
-
-Write from problem and current paradigm toward the **technical challenge**, key insight, approach, evidence preview, and contributions.
-
-Important distinction:
-
-```text
-observed limitation + technical reason = technical challenge
-```
-
-Avoid framing a coherent contribution as a sequence of naive-solution patches when a deeper scientifically accurate challenge/insight story exists.
-
-### Related Work
-
-Synthesize by conceptual dimension and position the paper fairly. Avoid citation dumping. Preserve the closest-work distinctions established by `literature-research` / `literature-scout`.
-
-### Method
-
-Use `references/method-craft.md`.
-
-The subsection architecture comes from `paper-architect`; within each central subsection, make explicit:
-
-```text
-Motivation → Design → Technical Advantage / Expected Mechanism
-```
-
-Do not mechanically organize Method around code modules. Explain why the design exists before low-level implementation details.
-
-### Experiments / Results
-
-Report evidence in the order defined by the research questions and claims. Separate measured result from interpretation. Keep protocol and conditions traceable.
-
-### Discussion
-
-Interpret rather than repeat. Distinguish measured evidence from mechanistic explanation, alternative explanations, scope, tradeoffs, and limitations.
-
-### Figures, tables, and captions
-
-Use `references/presentation-quality.md`.
-
-Figures and tables are part of the scientific argument. Ensure one main message per visual, clear captions, explicit metric direction/units, consistent precision, restrained emphasis, and terminology consistency.
-
-## Revision modes
-
-Support:
-
-- clarity and paragraph-flow revision;
-- reverse-outline restructuring within an approved section;
-- concision;
-- terminology consistency;
-- Introduction challenge framing;
-- Method Motivation–Design–Advantage execution;
-- figure/table caption and presentation revision;
-- LaTeX-friendly formatting;
-- response-to-reviewer revisions.
-
-Do not silently change the paper architecture. If subsection hierarchy, contribution placement, or storyline needs to change, hand back to `paper-architect`.
-
-## Output contract for substantial drafting/revision
-
-When useful, return or maintain:
-
-1. compact section mini-outline / paragraph roles;
-2. revised prose;
-3. reverse outline;
-4. major claim-evidence status (`supported / needs qualification / needs evidence`);
-5. short clarity/terminology/presentation checklist.
+If the source of truth is existing Chinese or English text and the task is translation, use `academic-translation`. Use this skill when writing or materially revising manuscript prose from the paper blueprint/evidence.
 
 ## Handoff
 
-- novelty/gap problem → `research-idea-refiner`;
-- missing/weak evidence → `experiment-designer`;
-- section/storyline problem → `paper-architect`;
-- visual argument problem → `scientific-figure` or `result-figure`;
-- submission-stage rejection-risk audit → `manuscript-review`.
+- literature positioning → `literature-research`;
+- claim/evidence issue → `engineering-research` / `research-idea-refiner`;
+- structure/idea placement → `paper-architect`;
+- translation → `academic-translation`;
+- submission-stage audit → `manuscript-review`.
