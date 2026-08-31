@@ -1,78 +1,76 @@
 ---
 name: literature-research
-description: Systematically investigate a research topic before or during paper conception. Build a research landscape, taxonomy, representative-work map, comparison matrix, open-problem list, and candidate gaps. Use when the user needs to understand a field rather than only check one specific closest-work novelty question.
+description: Unified literature workflow for broad field understanding and targeted novelty scouting. Use landscape mode to map a field and novelty-scout mode to test a scoped idea against closest work, terminology, missing citations, and prior-art threats.
 ---
 
 # Literature Research
 
 ## Mission
 
-Turn a broad research topic into a structured understanding of what is known, how the field is organized, what assumptions dominate, where paradigms differ, and which unresolved problems are plausible research opportunities.
+Use one literature entry point for two related tasks:
 
-This skill answers **“What is known, and how is the field structured?”**. It does not by itself certify novelty for a specific proposed contribution; hand targeted novelty threats to `literature-scout` and contribution synthesis to `research-idea-refiner`.
+```text
+Landscape mode      → What is known and how is the field structured?
+Novelty-scout mode  → Has this specific idea/mechanism/formulation already been done?
+```
 
-## Core workflow
+Do not infer novelty from a small search sample and never invent papers, metadata, claims, or results.
 
-1. **Define scope.** Clarify the research problem, application boundary, time horizon, inclusion/exclusion criteria, and desired depth.
-2. **Expand terminology.** Generate synonyms, older/newer terminology, formulation names, task names, mechanism names, and related communities.
-3. **Identify seed works.** Prefer surveys, seminal papers, strong recent papers, and representative methods from different paradigms.
-4. **Citation-chain.** Use backward references and forward citations to discover lineage and follow-up work.
-5. **Build a taxonomy.** Organize papers by scientific dimensions, not only chronology.
-6. **Construct a comparison matrix.** Compare problem setting, formulation, mechanism, assumptions, supervision/data, optimization/inference, evidence, strengths, and limitations.
-7. **Trace paradigm evolution.** Explain why later paradigms emerged and which limitations they attempted to resolve.
-8. **Extract unresolved issues.** Record contradictions, recurring failure modes, restrictive assumptions, unexplored regimes, and weakly supported claims.
-9. **Form candidate gaps.** Distinguish true unresolved scientific questions from mere missing combinations or benchmark gaps.
-10. **Hand off.** Send candidate gaps and closest-work threats to `research-idea-refiner` / `literature-scout`.
+## Choose the mode
 
-## Required artifacts
+### Landscape mode
 
-For substantial work, maintain:
+Use when the research area is still broad or the user needs a structured understanding of paradigms, assumptions, representative works, evolution, limitations, and open problems.
 
-- `literature-map.md` — important papers and their roles;
-- `research-taxonomy.md` — paradigms and comparison dimensions;
-- `paper-comparison-matrix.md` — structured closest/representative-work table;
-- `open-problems.md` — unresolved issues and gap candidates.
+Typical artifacts:
 
-## Taxonomy dimensions
+- `literature-map.md`;
+- research taxonomy;
+- representative-work / comparison matrix;
+- open-problem list.
 
-Choose only dimensions that change scientific interpretation. Common dimensions include:
+Workflow:
+
+```text
+scope → terminology expansion → seed works → citation chains
+→ taxonomy → comparison matrix → paradigm evolution
+→ recurring limitations → candidate gaps
+```
+
+### Novelty-scout mode
+
+Use when the proposed contribution is already reasonably scoped and the main uncertainty is positioning or novelty.
+
+Typical questions:
+
+- Has the same mechanism appeared under another name?
+- What are the 3–10 closest works?
+- Which work most threatens the novelty claim?
+- Which standard terminology should replace local wording?
+- Which citations support or contradict the motivation?
+
+Read `references/novelty-scout.md` for the targeted workflow and positioning table.
+
+## Shared comparison dimensions
+
+Compare only dimensions that change scientific interpretation, such as:
 
 - problem formulation;
-- assumptions and constraints;
-- representation;
-- core mechanism;
-- optimization / inference procedure;
-- training signal / supervision;
-- data requirements;
+- assumptions / information access;
+- representation and mechanism;
+- optimization / inference;
+- supervision / data requirements;
 - theoretical guarantees;
-- computational cost;
+- compute cost;
 - evaluation regime;
-- failure modes;
-- scope / generality.
+- failure modes and scope.
 
-## Research-landscape test
+## Handoff
 
-A literature review is not complete merely because many papers were collected. Before handoff, the researcher should be able to answer:
+- Candidate gap or novelty statement needs refinement → `research-idea-refiner`.
+- Literature reveals missing experiment or baseline → `engineering-research`.
+- Related-work organization is needed for a paper → `paper-architect`, then `academic-writer`.
 
-- What are the 2–5 major paradigms?
-- Why did each paradigm arise?
-- What limitation of earlier approaches did it address?
-- What assumptions remain shared across paradigms?
-- Which papers are the strongest novelty threats to a new idea?
-- Which unresolved issues recur across multiple papers?
-- Which apparent gaps are probably unimportant or already saturated?
+## Completion
 
-## Separation from other skills
-
-- Broad field understanding / research landscape → `literature-research`.
-- “Has this exact mechanism/formulation already been done?” → `literature-scout`.
-- Turn landscape + gap candidates into a contribution → `research-idea-refiner`.
-- Systematic-review manuscript / PRISMA-style exhaustive review → optional external systematic-review skill.
-
-## Integrity rules
-
-- Never invent citations, publication metadata, claims, or results.
-- Separate paper-authored claims from your interpretation.
-- Mark uncertain taxonomy assignments explicitly.
-- Do not infer novelty from absence in a small search sample.
-- Prefer primary papers for method claims; use surveys for navigation and taxonomy.
+The literature output should make clear what is known, what the closest threats are, what terminology experts use, which uncertainty remains, and which gap statements are defensible versus merely absent from a small sample.

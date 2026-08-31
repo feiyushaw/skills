@@ -1,22 +1,17 @@
 name: research
 status: stable-v2
-description: Research lifecycle from literature understanding and evidence generation to manuscript and reviewer response.
+description: Compact research lifecycle from literature and idea formation through evidence, paper production, review, and reviewer response.
 skills:
   - grilling
   - handoff
   - literature-research
-  - literature-scout
-  - faithful-paper-translation
   - research-idea-refiner
-  - research-critic
-  - experiment-designer
   - engineering-research
   - result-harvester
-  - scientific-figure
   - method-figure
   - result-figure
   - paper-architect
-  - chinese-to-academic-english
+  - academic-translation
   - academic-writer
   - manuscript-review
   - reviewer-response

@@ -1,141 +1,53 @@
 ---
 name: research-idea-refiner
-description: Refine a raw research idea into a defensible research gap, falsifiable hypothesis, contribution structure, claim-evidence map, and prioritized next questions. Use when the user is still shaping novelty, significance, mechanism, positioning, or contribution scope. Do not jump directly to manuscript prose.
+description: Refine a raw research idea into a defensible gap, hypothesis, contribution structure, claim map, and prioritized next questions. Includes adversarial stress-testing of novelty, necessity, mechanism, significance, evidenceability, and generality.
 ---
 
 # Research Idea Refiner
 
 ## Mission
 
-Turn a vague research intuition into a research contribution that can survive prior-art and reviewer pressure.
-
-The default transformation is:
+Turn a research intuition into a contribution that can survive closest-work and reviewer pressure before expensive experimentation or manuscript writing.
 
 ```text
 raw idea
-  ↓
-problem framing
-  ↓
-status quo / closest paradigm
-  ↓
-limitation and root cause
-  ↓
-research gap
-  ↓
-core hypothesis
-  ↓
-novel mechanism / formulation
-  ↓
-contribution tree
-  ↓
-claims
-  ↓
-required evidence
+→ problem / status quo
+→ unresolved limitation + root cause
+→ research gap
+→ hypothesis / mechanism
+→ contribution tree
+→ falsifiable claims
+→ required evidence
+→ adversarial stress test
 ```
 
-## First principle
+## Core workflow
 
-Never equate `apply A to B` with a publishable contribution. Ask what limitation in B exists, why it exists, why mechanism A addresses that root cause, why a direct transfer is insufficient, and what genuinely new formulation/mechanism is introduced.
+1. Normalize the problem, current paradigm, proposed mechanism, expected benefit, assumptions, and uncertainties.
+2. Build the problem chain: important problem → current paradigm → unresolved limitation → root cause → consequence → missing capability.
+3. Form a falsifiable hypothesis explaining why mechanism M should change observable outcome Y under condition C.
+4. Use `references/novelty-ladder.md` to classify the current contribution level.
+5. Separate contribution types only when meaningful: diagnostic, formulation, mechanism, algorithmic, empirical, or theoretical.
+6. Convert contributions into precise claims and required evidence.
+7. Run the adversarial stress test in `references/adversarial-stress-test.md`.
+8. End with the highest-value unresolved questions that could strengthen or kill the idea.
 
-## Default workflow
+## Required artifacts for substantial work
 
-### 1. Normalize the raw idea
+- `idea-canvas.md`;
+- `contribution-map.md`;
+- adversarial stress-test summary;
+- prioritized next-research-questions.
 
-Extract:
+## Boundaries
 
-- target problem;
-- proposed mechanism or intuition;
-- current paradigm being challenged;
-- expected benefit;
-- assumptions;
-- what is still uncertain.
+Do not equate `apply A to B`, a module swap, optimizer swap, or engineering integration with a publishable contribution without a deeper limitation/mechanism argument.
 
-### 2. Build the problem chain
-
-Write a compact chain:
-
-```text
-important problem
-→ current solution paradigm
-→ unresolved limitation
-→ root cause
-→ consequence
-→ missing capability
-```
-
-Do not accept a gap that is merely "few papers have studied X" unless the absence itself has scientific significance.
-
-### 3. Formulate the hypothesis
-
-A useful hypothesis states why the proposed mechanism should change an observable outcome.
-
-Prefer:
-
-> Because mechanism M changes property P, method A should improve outcome Y under condition C.
-
-Avoid:
-
-> We expect the proposed framework to perform better.
-
-### 4. Run the novelty ladder
-
-Classify the idea using `references/novelty-ladder.md`. State the current level and what would be required to move up one level.
-
-### 5. Build the contribution tree
-
-Separate contribution types when applicable:
-
-- problem/diagnostic contribution;
-- conceptual/formulation contribution;
-- methodological/mechanistic contribution;
-- algorithmic/technical contribution;
-- empirical/measurement contribution;
-- theoretical contribution.
-
-Do not inflate the list. Three strong contributions are better than six overlapping bullets.
-
-### 6. Convert contributions to claims
-
-For every contribution, define one or more falsifiable claims with required evidence. Use the contribution map template.
-
-### 7. Stress-test the idea
-
-Attack:
-
-- novelty — is this only A+B, a module swap, a new optimizer, or engineering integration?
-- necessity — would a simpler baseline solve the same problem?
-- mechanism — is the proposed explanation distinguishable from alternatives?
-- significance — does the solved limitation matter in practice or theory?
-- evidenceability — can the central claim actually be tested?
-- generality — is the contribution tied to one narrow benchmark?
-
-### 8. Produce the next-question queue
-
-Do not merely praise or summarize the idea. End with the highest-value unresolved research questions, prioritized by how much they could strengthen or kill the contribution.
-
-## Required output artifacts
-
-For substantial idea-refinement work, produce or update:
-
-- `idea-canvas.md`
-- `contribution-map.md`
-- a short `idea-stress-test` section
-- a prioritized `next-research-questions` section
+Do not write polished manuscript prose while the scientific logic is still unstable.
 
 ## Handoff
 
-- Need targeted prior-art validation → `literature-scout` or a systematic literature-review skill.
-- Need adversarial challenge → `research-critic`.
-- Need manuscript structure after the contribution stabilizes → `paper-architect`.
-- Need paragraph-level drafting only after the blueprint is stable → `academic-writer`.
-
-## Stop conditions
-
-Do not call an idea mature when any of the following remains unresolved:
-
-- the gap is only rhetorical;
-- the closest competing formulation is unknown;
-- the core hypothesis is not falsifiable;
-- contributions overlap heavily;
-- central claims lack possible evidence;
-- the claimed novelty disappears when expressed in standard terminology.
+- Closest-work or terminology uncertainty → `literature-research` in novelty-scout mode.
+- Claims are stable and need proof → `engineering-research`.
+- Evidence is stable and paper organization is needed → `paper-architect`.
+- Paragraph-level writing comes later → `academic-writer`.
