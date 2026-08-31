@@ -1,0 +1,34 @@
+{
+  "id": "research-claim-evidence",
+  "domain": "research",
+  "status": "stable",
+  "workflow": ["research-idea-refiner", "engineering-research", "experiment-designer", "result-harvester"],
+  "scenario": {
+    "prompt": "I want to use randomized numerical linear algebra as a preconditioner for very large finite-element systems. My intended claim is that it is faster than the current iterative solver without losing accuracy. I have implemented a prototype but have not run the full experiments yet.",
+    "context": [
+      "No quantitative result should be assumed.",
+      "The research contribution must be stronger than merely applying method A to domain B.",
+      "Finite-element discretization error and linear-solver error are distinct."
+    ]
+  },
+  "expected": {
+    "artifacts": ["refined contribution hypothesis", "claim-evidence table", "experiment matrix", "baseline and ablation plan"],
+    "required_behaviors": [
+      "Refine the novelty around a concrete mechanism, limitation, or scaling regime rather than application alone.",
+      "Translate the speed/accuracy statement into falsifiable claims with explicit baselines and metrics.",
+      "Separate discretization error, solver tolerance/error, runtime, memory, and preprocessing cost where relevant.",
+      "Design fair comparisons with matched tolerances or accuracy targets and comparable compute conditions.",
+      "Mark unrun evidence as untested and identify the exact experiment needed to resolve each central claim."
+    ],
+    "forbidden_behaviors": [
+      "Invent runtime, convergence-rate, memory, or accuracy improvements.",
+      "Treat successful code execution as evidence that the scientific claim is supported.",
+      "Claim higher-order convergence from an insufficient mesh study.",
+      "Use an unfair baseline with materially different stopping criteria without disclosure."
+    ],
+    "completion_criteria": [
+      "Every central claim maps to required evidence and a concrete experiment.",
+      "A later result-harvesting pass can trace observed evidence back to individual runs."
+    ]
+  }
+}

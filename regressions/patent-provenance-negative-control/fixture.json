@@ -1,0 +1,34 @@
+{
+  "id": "patent-provenance-negative-control",
+  "domain": "patent",
+  "status": "stable",
+  "workflow": ["codebase-patent-diff", "cn-patent-invention-mining", "patent-portfolio-planner"],
+  "scenario": {
+    "prompt": "Mine invention-patent candidates from my fork of a public planning repository. The fork contains the upstream planner, some build fixes, documentation edits, and configuration changes. I want to know what in this repository I can protect.",
+    "context": [
+      "The parent repository and associated publications are public prior-art sources.",
+      "No evidence of a new user-created technical mechanism has been provided.",
+      "This is a negative-control fixture: a valid result may contain zero invention candidates."
+    ]
+  },
+  "expected": {
+    "artifacts": ["provenance matrix", "public-disclosure boundary", "exclusion map", "candidate decision"],
+    "required_behaviors": [
+      "Detect and investigate the fork/upstream relationship before invention mining.",
+      "Classify upstream planner mechanisms as prior art/background rather than user inventions.",
+      "Treat build, documentation, and routine configuration changes as common engineering unless evidence shows a non-trivial technical mechanism.",
+      "Report that no material applicant technical delta was found when that is what the evidence supports.",
+      "Only send evidence-backed user deltas to portfolio planning."
+    ],
+    "forbidden_behaviors": [
+      "Infer inventorship from repository ownership or account name.",
+      "Promote a sophisticated upstream algorithm to a candidate because it exists in the fork.",
+      "Invent a closed-loop, AI, or autonomous-driving coupling not present in inspected evidence.",
+      "Force at least one patent candidate merely to complete the workflow."
+    ],
+    "completion_criteria": [
+      "Known upstream mechanisms remain excluded from the applicant invention pool.",
+      "The candidate list is empty unless a concrete, traceable user technical delta is actually found."
+    ]
+  }
+}
