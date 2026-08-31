@@ -1,8 +1,9 @@
 name: patent
-status: migration-planned
+status: stable-v1
 description: Chinese invention patent workflow with provenance-aware invention mining.
 skills:
   - grilling
+  - handoff
   - codebase-patent-diff
   - cn-patent-invention-mining
   - cn-patent-prior-art

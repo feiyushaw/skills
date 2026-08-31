@@ -2,117 +2,123 @@
 
 Composable skills for Codex, Claude Code, and other coding/research agents.
 
-This repository is the unified home for reusable agent workflows across software engineering, research, presentations, patents, and productivity. It follows a small-and-composable design: domain skills own domain reasoning; shared interaction patterns live in `core`; packs provide convenient installation groups.
+This repository is the canonical home for reusable workflows across software engineering, research, presentations, patents, and productivity. Domain skills own domain reasoning; reusable interaction disciplines live in `core`; packs provide installation views.
 
-> Chinese documentation: [README.zh-CN.md](README.zh-CN.md)
+> 中文说明: [README.zh-CN.md](README.zh-CN.md)
 
 ## Work domains
 
-| Domain | Purpose | Status |
+| Domain | Purpose | V1 status |
 |---|---|---|
-| `core` | Shared agent primitives and routing | V1 scaffold |
-| `engineering` | Specs, tickets, implementation, testing, debugging, review | planned |
-| `research` | Literature, idea refinement, experiments, figures, papers, review | migration planned |
-| `presentation` | Presentation architecture, Slidev, PPTX, review | migration planned |
-| `patent` | Chinese patent mining, prior art, drafting, review | migration planned |
-| `productivity` | Teaching, questionnaires, context handoff, utilities | planned |
+| `core` | Shared primitives: routing, grilling, handoff, agent-document discipline | stable |
+| `engineering` | Spec, tickets, architecture, implementation, TDD, debugging, review, long-work planning | stable core set |
+| `research` | Literature, idea refinement, experiments, evidence, figures, paper architecture/writing/review | migrated |
+| `presentation` | Tool-independent presentation architecture + Slidev scientific renderer | migrated / expanding |
+| `patent` | Provenance-aware Chinese invention mining, prior art, drafting, review | migrated |
+| `productivity` | GrillMe, teaching workspace, questionnaires, re-pitching, handoff | stable core set |
 | `experimental` | Unstable skills under evaluation | reserved |
 
-## Design model
+## Current stack
 
 ```text
-                         core
-              routing / interaction primitives
-                           |
-        +------------------+------------------+
-        |                  |                  |
-   engineering          research        presentation
-        |                  |                  |
-        +------------------+------------------+
-                           |
-                         patent
+core
+├── workflow-router
+├── grilling
+├── handoff
+└── writing-for-agents
 
-packs = installable views over these skills
+engineering
+├── domain-modeling       ├── codebase-design
+├── to-spec               ├── to-tickets
+├── prototype             ├── implement
+├── tdd                   ├── diagnosing-bugs
+├── code-review           ├── resolving-merge-conflicts
+└── wayfinder
+
+research
+├── literature-research   ├── literature-scout
+├── research-idea-refiner ├── research-critic
+├── experiment-designer   ├── engineering-research
+├── result-harvester      ├── scientific-figure / method-figure / result-figure
+├── paper-architect       ├── academic-writer
+├── faithful-paper-translation / chinese-to-academic-english
+└── manuscript-review
+
+presentation
+├── presentation-architect
+└── slidev-scientific-presentation
+
+patent
+codebase-patent-diff → cn-patent-invention-mining → cn-patent-prior-art
+→ cn-patent-drafting → cn-patent-review
++ autonomous-driving-patent domain guidance
+
+productivity
+├── grill-me
+├── teach
+├── to-questionnaire
+└── wait-what
 ```
 
-The dependency direction is intentional:
+## Design principles
 
-- `core` may not depend on a work domain.
-- domain skills may use `core` skills.
-- one domain should not silently own another domain's reasoning.
-- packs group skills; they do not contain workflow logic.
+1. **Small, composable behavior.** Avoid one giant agent workflow that owns every task.
+2. **Facts are agent work; decisions are human work.** Inspect files/tools/sources instead of asking users for facts the agent can obtain.
+3. **Persist important state.** Specs, tickets, CONTEXT.md, ADRs, research maps, claim-evidence tables, patent candidate IDs, and handoffs survive context windows.
+4. **Keep domain reasoning in domain skills.** Engineering discipline does not rewrite research methodology; writing does not silently change scientific claims.
+5. **Progressive disclosure.** Universal behavior stays in `SKILL.md`; branch-specific guidance belongs in local `references/`, `templates/`, or `scripts/`.
+6. **Self-contained installation.** A skill should work when installed individually; avoid fragile cross-directory file references.
+7. **Explicit invocation policy.** Large orchestrators normally disable implicit invocation; reusable disciplines can be model-invoked.
+8. **Preserve provenance.** Migrated and third-party-derived material records its source and license.
 
-## Invocation model
+## Packs
 
-Skills are classified by invocation behavior:
+`packs/` groups existing skills by job type:
 
-- **user-invoked workflow/router**: starts a substantial workflow and normally sets `policy.allow_implicit_invocation: false`.
-- **model-invoked primitive**: reusable discipline that an agent may call when useful.
-- **domain context**: specialized vocabulary, constraints, and review criteria that can be loaded alongside a workflow.
+- `engineering.yaml`
+- `research.yaml`
+- `presentation.yaml`
+- `patent.yaml`
+- `productivity.yaml`
+- `full.yaml`
+
+Packs do not contain workflow logic.
 
 ## Repository layout
 
 ```text
-skills/
-  core/
-  engineering/
-  research/
-  presentation/
-  patent/
-  productivity/
-  experimental/
+skills/<domain>/<skill-name>/
+  SKILL.md
+  agents/openai.yaml      # optional Codex invocation metadata
+  references/             # optional, local to this skill
+  templates/              # optional
+  scripts/                # optional
+
 packs/
 docs/
 scripts/
 .github/workflows/
 ```
 
-Each skill is self-contained:
+## Source migrations
 
-```text
-skills/<domain>/<skill-name>/
-  SKILL.md
-  agents/openai.yaml        # when Codex metadata is useful
-  references/               # optional
-  templates/                # optional
-  scripts/                  # optional
-```
+The initial domain stack was consolidated from:
 
-A skill should not require fragile `../../../shared/...` references to function after individual installation.
+- `feiyushaw/academic_skills` → `skills/research/`
+- `feiyushaw/patent_skills` → `skills/patent/`
+- `feiyushaw/presentation_skill` → `skills/presentation/`
+- selected/adapted workflows from `mattpocock/skills` → `core`, `engineering`, and `productivity`
 
-## V1 scope
-
-The first milestone establishes the monorepo architecture and migration contract. Existing private repositories are **not copied into this public repository in this bootstrap PR**.
-
-Planned sources:
-
-- `feiyushaw/academic_skills` -> `skills/research/`
-- `feiyushaw/patent_skills` -> `skills/patent/`
-- `feiyushaw/presentation_skill` -> `skills/presentation/`
-- selected, adapted engineering/productivity patterns from `mattpocock/skills`
-
-See [docs/migration.md](docs/migration.md) before moving any private source material.
-
-## Core principles
-
-1. A skill is a behavior primitive or a coherent domain workflow, not a giant prompt bundle.
-2. Facts the agent can inspect should be investigated by the agent; user questions should focus on decisions.
-3. Persist important state in explicit artifacts rather than relying on an indefinitely growing conversation.
-4. Domain claims must remain traceable to evidence; writing layers may not silently change technical meaning.
-5. Prefer progressive disclosure: keep universal rules in `SKILL.md`, move branch-specific detail into local references.
-6. Keep every skill independently installable and testable.
-7. Preserve upstream license and provenance when adapting third-party skills.
+See [docs/provenance.md](docs/provenance.md) and [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
 
 ## Development
-
-Validate the repository with:
 
 ```bash
 python3 scripts/validate-skills.py
 ```
 
-The same check runs in GitHub Actions.
+The same structural check runs in GitHub Actions.
 
-## Third-party provenance
+## Next extensions
 
-Adapted third-party material must be recorded in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md). Matt Pocock's `skills` repository is MIT licensed; attribution is retained for adapted material.
+High-value follow-ups are a true PowerPoint/PPTX renderer, presentation review skill, pack installer/catalog generation, and workflow regression tests. The old source repositories remain historical sources until the monorepo has been used long enough to retire them safely.

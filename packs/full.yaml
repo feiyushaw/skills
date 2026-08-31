@@ -1,8 +1,9 @@
 name: full
-status: planned
-description: Full stable Feiyu skill stack after domain migration.
+status: stable-v1
+description: Full Feiyu skill stack.
 includes:
   - engineering
   - research
   - presentation
   - patent
+  - productivity
