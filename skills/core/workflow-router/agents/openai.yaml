@@ -1,0 +1,5 @@
+interface:
+  display_name: "Workflow Router"
+  short_description: "Route work to the right skill or workflow"
+policy:
+  allow_implicit_invocation: false
