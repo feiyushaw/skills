@@ -1,0 +1,22 @@
+{
+  "project": "example-project",
+  "generated_at": null,
+  "experiment_roots": [],
+  "expected_matrix": null,
+  "code": {"repository": null, "commit": null, "dirty": null},
+  "data": {"name": null, "version": null, "split": null},
+  "source_patterns": {
+    "configs": ["**/config*.json", "**/config*.yaml", "**/config*.yml"],
+    "metrics": ["**/metrics*.json", "**/metrics*.csv", "**/results*.json", "**/results*.csv"],
+    "logs": ["**/*.log"]
+  },
+  "required_run_fields": ["run_id", "method", "benchmark", "seed", "status"],
+  "metric_semantics": {},
+  "aggregation_policy": {
+    "group_by": ["method", "benchmark"],
+    "statistic": "mean",
+    "uncertainty": "std",
+    "failed_runs": "report-separately",
+    "missing_runs": "do-not-impute"
+  }
+}
