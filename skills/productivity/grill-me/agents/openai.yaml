@@ -1,0 +1,5 @@
+interface:
+  display_name: "Grill Me"
+  short_description: "Interrogate a plan until key decisions are explicit"
+policy:
+  allow_implicit_invocation: false
